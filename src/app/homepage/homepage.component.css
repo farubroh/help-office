@@ -1,7 +1,9 @@
 /* --- Variables & Host Setup --- */
 :host {
   --font-family: 'Poppins', sans-serif;
-  --bg-color: #f2f4f8;
+  /* --bg-color: #f2f4f8; */
+  --bg-color: #151718;
+
   --white: #ffffff;
   --primary-purple: #623cea;
   --primary-green: #00c48c;
@@ -17,6 +19,7 @@
   color: var(--text-dark);
   /* min-height: 100vh; */
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .layout-container {
@@ -72,22 +75,22 @@
 .sidebar .menu {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 16px;
 }
 
 .sidebar .menu .menu-item {
   color: var(--text-gray);
-  font-size: 24px;
+  font-size: 18px;
   text-decoration: none;
-  padding: 10px;
+  padding: 6px;
   border-radius: 12px;
   transition: 0.2s;
 }
 
 .sidebar .menu .menu-item.active,
 .sidebar .menu .menu-item:hover {
-  color: var(--primary-purple);
-  background: rgba(98, 60, 234, 0.1); /* 10% opacity of purple */
+  color: white;
+  background: #151718 /* 10% opacity of purple */
 }
 
 .sidebar .bottom-actions {
@@ -117,7 +120,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: auto;
+  
   padding-right: 5px;
 }
 

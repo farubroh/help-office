@@ -1,6 +1,6 @@
 <div class="layout-container">
   
-  <aside class="sidebar">
+  <!-- <aside class="sidebar">
     
 
     <nav class="menu">
@@ -17,6 +17,92 @@
         <i class="ph ph-moon"></i>
       </div>
     </div>
+  </aside> -->
+  <aside [class.w-72]="sidebarOpen" [class.w-16]="!sidebarOpen"
+         class="bg-white border-r border-gray-200 p-6 flex flex-col gap-6 fixed top-0 left-0 bottom-0 overflow-auto z-40 transition-all duration-300">
+
+    <!-- Logo + Hamburger -->
+    <div class="flex items-center justify-between">
+      <!-- Left side (logo + title) -->
+      <div class="flex items-center gap-3" *ngIf="sidebarOpen">
+        <img style="max-width: 15%" src="../assets/images/branding.jpg" alt="IUMS">
+        <h1 class="text-4xl font-semibold">IUMS</h1>
+      </div>
+
+      <!-- Button always visible -->
+      <button (click)="toggleSidebar()" class="p-2 ml-auto">
+        <i class="bi bi-list text-gray-700 text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-4 flex-1">
+      <ul class="space-y-2 text-sm">
+
+        <!-- HelpDesk (always visible) -->
+        <!-- HelpDesk (always visible) -->
+        <li>
+          <div (click)="toggleMenu('product')"
+               class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-gray-100 relative">
+            <div class="flex items-center gap-3">
+              <i class="bi bi-box"></i>
+              <span *ngIf="sidebarOpen">HelpDesk</span>
+            </div>
+            <i *ngIf="sidebarOpen"
+               [class.bi-chevron-down]="expandedMenu==='product'"
+               [class.bi-chevron-up]="expandedMenu!=='product'"></i>
+          </div>
+
+          <!-- Expanded submenu -->
+          <ul *ngIf="expandedMenu==='product' && sidebarOpen"
+              class="mt-1 ml-6 space-y-1 border-l border-gray-200 relative pl-4">
+
+            <li class="relative group">
+              <div (click)="navigateToConfiguration()"
+                   class="flex items-center justify-between cursor-pointer hover:bg-gray-100 px-2 py-2 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <span class="text-gray-700 font-medium">Configuration</span>
+                </div>
+              </div>
+              <!-- Connector curve -->
+              <span class="absolute -left-[1.05rem] top-0 h-full w-4 border-l border-gray-200"></span>
+            </li>
+
+            <li class="relative group">
+              <div (click)="navigateToAdminDashboard()"
+                   class="flex items-center justify-between cursor-pointer hover:bg-gray-100 px-2 py-2 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <span *ngIf="sidebarOpen" class="text-gray-700 font-medium">Admin Dashboard</span>
+                </div>
+              </div>
+              <span class="absolute -left-[1.05rem] top-0 h-full w-4 border-l border-gray-200"></span>
+            </li>
+
+            <li class="relative group">
+              <div (click)="navigateToUserDashboard()"
+                   class="flex items-center justify-between cursor-pointer hover:bg-gray-100 px-2 py-2 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <span *ngIf="sidebarOpen" class="text-gray-700 font-medium">User Dashboard</span>
+                </div>
+              </div>
+              <span class="absolute -left-[1.05rem] top-0 h-full w-4 border-l border-gray-200"></span>
+            </li>
+
+            <li class="relative group">
+              <div (click)="navigateToDeveloperDashboard()"
+                   class="flex items-center justify-between cursor-pointer hover:bg-gray-100 px-2 py-2 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <span *ngIf="sidebarOpen" class="text-gray-700 font-medium">Developer Dashboard</span>
+                </div>
+              </div>
+              <span class="absolute -left-[1.05rem] top-0 h-full w-4 border-l border-gray-200"></span>
+            </li>
+          </ul>
+        </li>
+
+
+      </ul>
+    </nav>
   </aside>
 
   <main class="main-content">
@@ -91,7 +177,7 @@
         </div>
       </div>
 
-      <div class="card time-tracking">
+      <!-- <div class="card time-tracking">
         <div class="card-header">
           <h3>Time tracking</h3>
           <i class="ph ph-dots-three"></i>
@@ -113,7 +199,7 @@
             <button class="control-btn icon-only"><i class="ph ph-stop"></i></button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="card upcoming-tasks">
         <div class="card-header">
