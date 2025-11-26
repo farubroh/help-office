@@ -1,0 +1,188 @@
+<div class="layout-container">
+  
+  <aside class="sidebar">
+    
+
+    <nav class="menu">
+      <a href="#" class="menu-item active"><i class="ph ph-squares-four"></i></a>
+      <a href="#" class="menu-item"><i class="ph ph-list-dashes"></i></a>
+      <a href="#" class="menu-item"><i class="ph ph-paperclip"></i></a>
+      <a href="#" class="menu-item"><i class="ph ph-clock"></i></a>
+      <a href="#" class="menu-item"><i class="ph ph-check-circle"></i></a>
+    </nav>
+
+    <div class="bottom-actions">
+      <div class="theme-toggle">
+        <i class="ph ph-sun"></i>
+        <i class="ph ph-moon"></i>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    
+    <div class="card header-card">
+      <div class="header-top">
+        <div class="title-group">
+          <h1>BoithokX <i class="ph ph-caret-down"></i></h1>
+          <!-- <h1>GolBoithok <i class="ph ph-caret-down"></i></h1>
+          <h1>Shobai.ai <i class="ph ph-caret-down"></i></h1> -->
+          <!-- <span class="status-badge on-track">● On Track <i class="ph ph-caret-down"></i></span>
+          <span class="last-updated">Last updated on: 01st March, 2022</span> -->
+        </div>
+        <div class="search-bar">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search">
+        </div>
+      </div>
+
+      <div class="header-bottom">
+        <div class="assignees">
+          <div class="avatars">
+            <span class="assign-label">Assigned to project</span>
+            @for(id of projectMembers; track id) {
+              <img [src]="'https://i.pravatar.cc/150?img=' + id" alt="Member">
+            }
+            <div class="avatar-more">+2</div>
+          </div>
+          <button class="btn-primary"><i class="ph ph-user-plus"></i> Assign Member</button>
+        </div>
+        
+        <div class="tabs">
+          <a href="#" class="active">Overview</a>
+          <a href="#">List</a>
+          <a href="#">Board</a>
+          <a href="#">Timeline</a>
+          <a href="#">Calendar</a>
+          <a href="#">Dashboard</a>
+          <a href="#">Messages</a>
+          <a href="#">Files</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      
+      <div class="card task-status">
+        <div class="card-header">
+          <h3>Task Status</h3>
+          <div class="toggle-pill">
+            <span class="active">All Task</span>
+            <span>My tasks</span>
+          </div>
+        </div>
+        
+        <div class="task-list">
+          @for (task of tasks; track task.name) {
+            <div class="task-item">
+              <div class="task-info">
+                <div class="radio-circle"></div>
+                <span class="task-name">{{ task.name }}</span>
+                <span class="tag" [ngClass]="task.tagType">
+                  <i *ngIf="task.tagType !== 'info'" class="ph ph-warning-circle"></i> 
+                  <i *ngIf="task.tagType === 'info'" class="ph ph-hourglass"></i>
+                  {{ task.tag }}
+                </span>
+              </div>
+              <span class="task-time">{{ task.time }}</span>
+              <img [src]="'https://i.pravatar.cc/150?img=' + task.userImg" class="avatar-sm">
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="card time-tracking">
+        <div class="card-header">
+          <h3>Time tracking</h3>
+          <i class="ph ph-dots-three"></i>
+        </div>
+        
+        <div class="timer-content">
+          <div class="timer-project">Filllo Design System</div>
+          <div class="timer-display">
+            <span>{{ pad(timerH) }}<small>h</small></span>
+            <span>{{ pad(timerM) }}<small>m</small></span>
+            <span>{{ pad(timerS) }}<small>s</small></span>
+          </div>
+          
+          <div class="timer-controls">
+            <button class="control-btn icon-only"><i class="ph ph-arrow-counter-clockwise"></i></button>
+            <button class="control-btn play" (click)="toggleTimer()">
+              <i class="ph" [ngClass]="timerRunning ? 'ph-pause' : 'ph-play'"></i>
+            </button>
+            <button class="control-btn icon-only"><i class="ph ph-stop"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card upcoming-tasks">
+        <div class="card-header">
+          <h3>Upcoming Tasks</h3>
+          <button class="btn-success">Add New Task <i class="ph ph-plus"></i></button>
+        </div>
+
+        <div class="calendar-strip">
+          <button class="nav-arrow"><i class="ph ph-caret-left"></i></button>
+          @for(day of calendarDays; track day.day) {
+            <div class="day-item" [class.active]="day.active">
+              <span class="d-name">{{ day.day }}</span>
+              <span class="d-num">{{ day.date }}</span>
+            </div>
+          }
+          <button class="nav-arrow"><i class="ph ph-caret-right"></i></button>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-row">
+            <span class="time">10AM</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="avatars-mini">
+                <img src="https://i.pravatar.cc/150?img=10">
+                <img src="https://i.pravatar.cc/150?img=12">
+              </div>
+              <span>Discovery call</span>
+            </div>
+          </div>
+           <div class="timeline-row">
+            <span class="time">11AM</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card blue-tint">
+              <div class="avatars-mini">
+                <img src="https://i.pravatar.cc/150?img=20">
+              </div>
+              <span>Company onboarding</span>
+            </div>
+            <div class="timeline-card blue-tint offset-card">
+                <div class="avatars-mini">
+                  <img src="https://i.pravatar.cc/150?img=5">
+                </div>
+                <span>Company onboarding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card recent-activity">
+        <div class="card-header">
+          <h3>Recent activity (7)</h3>
+          <a href="#" class="see-all">See all ></a>
+        </div>
+
+        <div class="activity-list">
+          @for(act of activities; track act.user) {
+            <div class="activity-item">
+              <img [src]="'https://i.pravatar.cc/150?img=' + act.userImg" class="avatar-md">
+              <div class="activity-text">
+                <div class="name">{{ act.user }}</div>
+                <div class="desc">{{ act.action }} <span class="highlight">{{ act.target }}</span></div>
+              </div>
+              <span class="act-time">{{ act.time }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </main> 
+</div>
